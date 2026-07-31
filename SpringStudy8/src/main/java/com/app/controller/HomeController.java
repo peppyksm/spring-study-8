@@ -8,11 +8,18 @@ public class HomeController {
 
 	@RequestMapping("/")
 	public String home() {
-
-//return "/WEB-INF/views/home.jsp";
-//return "/WEB-INF/views/mainpage.jsp";
-
-//--ViewResolver 설정 이후
+		
+		//--ViewResolver 설정이 없으면
+//		return "/WEB-INF/views/home.jsp";
+//		return "/WEB-INF/views/mainpage.jsp";
+		
+		//--ViewResolver 설정 이후
 		return "home";
+//		return "mainpage";
+		
+		//prefix : /WEB-INF/vies/
+		//suffix : /jsp
+		
+		//	/WEP-INF/views/home.jsp
 	}
 }

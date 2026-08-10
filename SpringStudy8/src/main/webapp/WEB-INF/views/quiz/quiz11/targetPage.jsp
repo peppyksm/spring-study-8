@@ -11,8 +11,12 @@
 	<h1>targetPage</h1>
 	<p>${accessUrl}</p>
 
-	<c:if test="${hide3 == 'hide3'}">
+	<!--<c:if test="${hide3 == 'hide3'}">
 		<p>${hide3}</p>
-	</c:if>
+	</c:if>-->
+	
+	<!-- <p>${sessionScope.accessUrl}</p>  -->
+	
+	<p>${fromhide3}</p>
 </body>
 </html>

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>readCookie Page</h1>
+	<h1>readCookie page</h1>
 	
 	<h2>${menu}</h2>
 </body>

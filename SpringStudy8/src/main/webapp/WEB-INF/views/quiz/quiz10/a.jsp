@@ -7,13 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<p>FromA</p>
+	<p>OriginalA</p>
+
+<%-- 	<p>${sessionScope.fromB}</p> --%>
 	
-	<h1>FromA</h1>
-	<h1>OriginalA</h1>
-	<p>${msg}</p>
-	<p>${sessionScope.fromB}</p>
 	<p>${fromB}</p>
-	
-	
 </body>
 </html>

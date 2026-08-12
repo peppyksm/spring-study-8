@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,11 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="/quiz12/login" method="post">
+	<h1>quiz12 login page</h1>
 	
-		<span>ID </span><input type="text" name="id"><br> 
-		<span>PW </span><input type="password" name="pw"><br>
-		<button type = "submit">로그인</button>
+	<form action="/quiz12/login" method="post">
+		id : <input type="text" name="id"> <br>
+		pw : <input type="password" name="pw"> <br>
+		<button type="submit">로그인</button>
 	</form>
 </body>
 </html>

@@ -7,8 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 	<h1>/board/notice 요청</h1>
 </body>
-
 </html>

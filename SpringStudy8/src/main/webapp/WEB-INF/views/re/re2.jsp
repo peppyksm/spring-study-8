@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>re/re2</h1>
+	<h1> re/re2 </h1>
 	
 	<p>${msg}</p>
 </body>

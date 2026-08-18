@@ -1,5 +1,6 @@
 package com.app.controller.admin;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.app.dto.room.Room;
+import com.app.dto.room.RoomSearchCondition;
 import com.app.dto.user.User;
 import com.app.dto.user.UserSearchCondition;
 import com.app.service.room.RoomService;
@@ -56,12 +58,20 @@ public class AdminController {
 	
 	//관리자가 객실관리   전체 객실 목록 조회
 	@GetMapping("/admin/rooms")
-	public String rooms(Model model) {
+	public String rooms(Model model, RoomSearchCondition roomSearchCondition) {
 		
 		//rooms 페이지
 		// T_ROOM 테이블 객실데이터   -> 조회  -> view전달 -> 표시
+		System.out.println(roomSearchCondition);
 		
-		List<Room> roomList = roomService.findRoomList();
+		List<Room> roomList = new ArrayList<Room>();
+		
+		if(roomSearchCondition.searchKeyword != null) {
+			roomList = roomService.findRoomListByRoomSearchCondition(roomSearchCondition);
+		}else {
+			roomList = roomService.findRoomList();
+		}
+		
 		
 		model.addAttribute("roomList", roomList);
 		

@@ -8,6 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import com.app.dao.room.RoomDAO;
 import com.app.dto.room.Room;
+import com.app.dto.room.RoomSearchCondition;
+import com.app.dto.user.User;
+import com.app.dto.user.UserSearchCondition;
 
 // 데이터소스와 연결/통신하는 역할
 // DB연동 -> DAO
@@ -17,63 +20,63 @@ import com.app.dto.room.Room;
 @Repository
 public class RoomDAOImpl implements RoomDAO {
 
-	//DB연동 처리할때 필요한 관련된 객체(Bean) 주입
+	// DB연동 처리할때 필요한 관련된 객체(Bean) 주입
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
-	
-	
+
 	@Override
 	public List<Room> findRoomList() {
-		
+
 		// DB 연동 -> room 테이블 데이터 조회 -> List<Room>
 		System.out.println("RoomDAOImpl findRoomList");
-		
+
 		List<Room> roomList = sqlSessionTemplate.selectList("room_mapper.findRoomList");
-		
+
 		return roomList;
 	}
 
 	@Override
 	public int saveRoom(Room room) {
 
-		//DB에 room정보 테이블에 room 정보를 저장
-								//실행할 쿼리 위치의 식별자, 매개변수
+		// DB에 room정보 테이블에 room 정보를 저장
+		// 실행할 쿼리 위치의 식별자, 매개변수
 		int result = sqlSessionTemplate.insert("room_mapper.saveRoom", room);
-		//수행 적용된 행의 수
-		
+		// 수행 적용된 행의 수
+
 		return result;
 	}
 
 	@Override
 	public Room findRoomByRoomId(int roomId) {
 		// TODO Auto-generated method stub
-		
-		Room room = sqlSessionTemplate.selectOne("room_mapper.findRoomByRoomId",  roomId);
-		
+
+		Room room = sqlSessionTemplate.selectOne("room_mapper.findRoomByRoomId", roomId);
+
 		return room;
 	}
 
 	@Override
 	public int removeRoom(int roomId) {
-		
-		//delete 삭제쿼리 -> return 적용된 행의 갯수
+
+		// delete 삭제쿼리 -> return 적용된 행의 갯수
 		int result = sqlSessionTemplate.delete("room_mapper.removeRoom", roomId);
-		
+
 		return result;
 	}
 
 	@Override
 	public int modifyRoom(Room room) {
-		
+
 		int result = sqlSessionTemplate.update("room_mapper.modifyRoom", room);
-		
+
 		return result;
 	}
-	
+
+	@Override
+	public List<Room> findRoomListByRoomSearchCondition(RoomSearchCondition roomSearchCondition) {
+		List<Room> result = sqlSessionTemplate.selectList("room_mapper.findRoomListBySearchCondition",
+				roomSearchCondition);
+		return result;
+	}
+
 }
-
-
-
-
-
-

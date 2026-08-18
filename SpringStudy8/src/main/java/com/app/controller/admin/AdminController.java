@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.app.dto.room.Room;
 import com.app.dto.user.User;
+import com.app.dto.user.UserSearchCondition;
 import com.app.service.room.RoomService;
 import com.app.service.user.UserService;
 
@@ -207,11 +208,60 @@ public class AdminController {
 	
 	
 	@GetMapping("/admin/users")
-	public String users(Model model) {
-		List<User> userList = userService.findUserList();
+	public String users(Model model, UserSearchCondition userSearchCondition) {
+		
+		//검색 조건
+		//검색 조건 O -> 조건 검색 결과
+		//검색 조건 X -> 전체 조회
+		System.out.println(userSearchCondition);
+		
+		
+		List<User> userList = userService.findUserListBySearchCondition(userSearchCondition);
+				
 		model.addAttribute("userList", userList);
+		model.addAttribute("userSearchCondition", userSearchCondition);
 		
 		return "admin/users";
+	}
+	
+	
+	
+	
+	@GetMapping("/admin/user/{id}")
+	public String user(@PathVariable String id, Model model) {
+		
+		User user = userService.findUserById(id);
+		model.addAttribute("user", user);
+		
+		return"admin/user";
+	}
+	
+	@GetMapping("/admin/modifyUser/{id}")
+	public String modifyUser(@PathVariable String id, Model model) {
+		
+		User user = userService.findUserById(id);
+		model.addAttribute("user", user);
+		
+		return"admin/modifyUser";
+	}
+	
+	
+	
+	
+	@PostMapping("/admin/modifyUser")
+	public String modifyUserAction(User user) {
+		
+		System.out.println("modifyUser 에 요청 들어온 값");
+		System.out.println(user);
+		
+		int result = userService.modifyUser(user);
+		
+		if(result > 0) {
+			return "redirect:/admin/user/" + user.getId();
+		}else {
+			return "redirect:/admin/modifyUser/" + user.getId();
+		}
+		
 	}
 	
 	

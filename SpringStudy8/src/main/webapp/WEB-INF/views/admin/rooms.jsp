@@ -17,7 +17,7 @@
 	
 	<div>
 		<form action='' method="get">
-		<label>빌딩이름 <input type="text" name="searchKeyword" <c:if test="${roomSearchCondition.searchKeyword != null}"> value = "${roomSearchCondition.searchKeyword}"</c:if> > </label>
+		<label>빌딩이름: <input type="text" name="searchKeyword" <c:if test="${roomSearchCondition.searchKeyword != null}"> value = "${roomSearchCondition.searchKeyword}"</c:if> > </label>
 		
 		<br>
 			<label><input type="radio" name="viewType" value="OCN" <c:if test="${roomSearchCondition.viewType == 'OCN'}">checked</c:if>>오션뷰</label>

@@ -64,16 +64,20 @@ public class AdminController {
 		// T_ROOM 테이블 객실데이터   -> 조회  -> view전달 -> 표시
 		System.out.println(roomSearchCondition);
 		
-		List<Room> roomList = new ArrayList<Room>();
+		/* List<Room> roomList = new ArrayList<Room>(); */
 		
-		if(roomSearchCondition.searchKeyword != null) {
-			roomList = roomService.findRoomListByRoomSearchCondition(roomSearchCondition);
-		}else {
-			roomList = roomService.findRoomList();
-		}
+		
+		List<Room> roomList = roomService.findRoomListByRoomSearchCondition(roomSearchCondition);
+		
+		/*
+		 * if(roomSearchCondition.searchKeyword != null) { roomList =
+		 * roomService.findRoomListByRoomSearchCondition(roomSearchCondition); }else {
+		 * roomList = roomService.findRoomList(); }
+		 */
 		
 		
 		model.addAttribute("roomList", roomList);
+		model.addAttribute("roomSearchCondition", roomSearchCondition);
 		
 		return "admin/rooms";		
 	}

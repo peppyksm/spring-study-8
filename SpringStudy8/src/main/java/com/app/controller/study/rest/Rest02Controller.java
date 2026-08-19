@@ -41,7 +41,7 @@ public class Rest02Controller {
 		/*
 			 {
 			 	"id":"abc",
-			 	"name:"abcname".
+			 	"name:"abcname",
 			 	"userType":"CUS",
 			 	"pw:"pwpw"
 			 }
@@ -51,7 +51,7 @@ public class Rest02Controller {
 		
 		String result = "{\r\n"
 				+ "			 	\"id\":\"abc\",\r\n"
-				+ "			 	\"name:\"abcname\".\r\n"
+				+ "			 	\"name:\"abcname\",\r\n"
 				+ "			 	\"userType\":\"CUS\",\r\n"
 				+ "			 	\"pw:\"pwpw\"\r\n"
 				+ "			 }";

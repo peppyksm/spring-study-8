@@ -128,11 +128,31 @@ public class UserServiceImpl implements UserService {
 		return result;
 	}
 
-
+	@Override
 	public List<User> findUserListBySearchCondition(UserSearchCondition userSearchCondition) {
 		
 		List<User> userList = userDAO.findUserListBySearchCondition(userSearchCondition);
 		return userList;
+	}
+	
+	@Override
+	public boolean isDuplicatedId(String id) {
+		
+		//매개변수 id
+		//DB에 있나?
+		
+		//id중복인가?
+		//중복 -> true
+		//중복X -> false
+		
+		User user = userDAO.findUserById(id);
+		
+		if(user==null) { //해당 아이디가 없다 -> 중복X
+			return false;
+		}else {			//해당 아이디가 있다 -> 중복O
+			return true;
+		}
+
 	}
 }
 

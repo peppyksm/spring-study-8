@@ -22,5 +22,5 @@ public interface UserService {
 	int modifyUser(User user);
 	int modifyUserPw(User user);
 
-	
+	public boolean isDuplicatedId(String id);
 }

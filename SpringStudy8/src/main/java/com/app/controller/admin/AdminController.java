@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,8 +33,22 @@ public class AdminController {
 	@Autowired
 	UserService userService;
 	
+	private static final Logger Log = LogManager.getLogger(AdminController.class);
+	
 	@GetMapping("/admin/registerRoom")
 	public String registerRoom() {
+		
+		System.out.println("println");
+		Log.info("log level info 기본사항");
+		Log.error("심각한 에러 발생 추후 꼭 처리");
+		Log.warn("경고 지금 수행은 문제 없으나 확인해볼것");
+		
+		Log.debug("디버그 레벨 로그");
+		
+		Log.trace("trace level 메시지1");
+		Log.trace("trace level 메시지2");
+		Log.trace("trace level 메시지3");
+		
 		return "admin/registerRoom";
 	}
 	

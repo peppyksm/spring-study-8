@@ -2,6 +2,8 @@ package com.app.controller.customer;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.app.common.ApiCommonCode;
 import com.app.common.CommonCode;
+import com.app.controller.admin.AdminController;
 import com.app.dto.api.ApiResponse;
 import com.app.dto.api.ApiResponseHeader;
 import com.app.dto.user.User;
@@ -19,8 +22,10 @@ import com.app.dto.user.UserDupCheck;
 import com.app.service.user.UserService;
 import com.app.util.LoginManager;
 
+import lombok.extern.slf4j.Slf4j;
 import oracle.jdbc.proxy.annotation.Post;
 
+@Slf4j //private static final Logger Log = LogManager.getLogger(CustomerController.class);
 @Controller
 public class CustomerController {
 
@@ -32,6 +37,7 @@ public class CustomerController {
 
 	@GetMapping("/customer/signup")
 	public String signup() {
+		log.info("/customer/signup 경로 접근 확인");
 		return "customer/signup";
 	}
 
@@ -61,6 +67,8 @@ public class CustomerController {
 		System.out.println("/customer/checkDupId");
 		System.out.println(data);
 		
+		log.info("/customer/checkDupId 아이디 중복체크 요청 값{}", data);
+		
 		boolean result = userService.isDuplicatedId(data);
 		System.out.println(result);
 		
@@ -83,6 +91,8 @@ public class CustomerController {
 								//리퀘스트바디 요청을 객체로 받으면 내부적으로 알아서 json 포맷을 객체로 파싱
 
 		System.out.println(userDupCheck);
+		
+		log.info("/customer/checkDupId 아이디 중복체크 요청 값{}", userDupCheck);
 		
 		boolean result = userService.isDuplicatedId( userDupCheck.getId() );
 		System.out.println(result);

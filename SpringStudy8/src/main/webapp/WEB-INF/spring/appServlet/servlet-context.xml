@@ -28,6 +28,7 @@ http://www.springframework.org/schema/context/spring-context.xsd">
 		<beans:property name="suffix" value=".jsp"></beans:property>
 	</beans:bean>
 
+	<!-- css js 등 리소스 파일은 /resources 경로에 넣어야 interceptor에 안걸림-->	
 	<resources location="/resources/" mapping="/**"></resources>
 	
 	<annotation-driven>						
@@ -45,6 +46,28 @@ http://www.springframework.org/schema/context/spring-context.xsd">
 			</beans:bean>				
 		</message-converters>					
 	</annotation-driven>
+	
+	<interceptors>
+		<interceptor>
+		
+			<mapping path="/**"/>
+			
+			<exclude-mapping path="/"/>
+			<exclude-mapping path="/main"/>
+			<exclude-mapping path="/customer/signin"/>
+			<exclude-mapping path="/customer/signup"/>
+			
+			<!-- 모든 필요한 요청 링크도 exclude 처리 해야함(ID 중복검사 등) -->
+			<exclude-mapping path="/customer/checkDupId"/>
+			<exclude-mapping path="/customer/checkDupIdJson"/> 
+			
+			<exclude-mapping path="/css/**"/> 
+			<exclude-mapping path="/js/**"/> 
+			<exclude-mapping path="/images/**"/> 
+
+			<beans:bean class="com.app.interceptor.LoginInterceptor"></beans:bean>
+		</interceptor>
+	</interceptors>
 	
 
 </beans:beans>

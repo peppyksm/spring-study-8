@@ -6,12 +6,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+	<style>
+	</style>
+	
+	<link href="/css/main.css" rel="stylesheet">
+
 </head>
 <body>
 	<h1>main</h1>
 	
 	<div>
-	
+		<img src="images/img.png">
+		<img src="https://asdfkorea.com/og-image.png">
 		<c:if test="${loginUserId == null }">
 			<button type="button" onclick=" location.href='/customer/signup' ">회원가입</button>
 			<button type="button" onclick=" goSignup() ">회원가입</button>

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,13 +16,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.app.common.CommonCode;
+import com.app.controller.customer.CustomerController;
 import com.app.dto.room.Room;
 import com.app.dto.room.RoomSearchCondition;
 import com.app.dto.user.User;
 import com.app.dto.user.UserSearchCondition;
 import com.app.service.room.RoomService;
 import com.app.service.user.UserService;
+import com.app.util.LoginManager;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 public class AdminController {
 	//관리자 접근 페이지   (전체 관리자) or (판매자측/호텔측 사용자)
@@ -32,6 +39,45 @@ public class AdminController {
 	
 	@Autowired
 	UserService userService;
+
+	
+	@GetMapping("/admin/signin")
+	public String signin() {
+		return "admin/signin";
+	}
+
+	@PostMapping("/admin/signin")
+	public String signinAction(User user, HttpSession session) {
+
+		// 로그인처리로직
+
+		System.out.println("로그인시 입력한 값");
+		System.out.println(user);
+
+		// 사용자가 입력한 id pw -> DB 비교
+
+		// id pw 맞으면 로그인 성공?
+		// userType
+
+		user.setUserType(CommonCode.USER_USERTYPE_ADMIN);
+		User loginUser = userService.checkUserLogin(user);
+		System.out.println("================="+loginUser);
+
+		// 성공//실패
+
+		if (loginUser == null || loginUser.getUserType().equals(CommonCode.USER_USERTYPE_CUSTOMER)) { // 실패
+			System.out.println("로그인실패");
+			return "redirect:/customer/signin";
+		} else { // 성공
+			System.out.println("로그인성공");
+			System.out.println(loginUser);
+
+			LoginManager.setSessionLoginUserId(session, loginUser.getId());
+
+			// return "redirect:/main";
+			return "redirect:/admin/users"; //
+		}
+	}
 	
 	private static final Logger Log = LogManager.getLogger(AdminController.class);
 	
